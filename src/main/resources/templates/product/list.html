@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>商品一覧</title>
+	<meta charset="UTF-8" />
+	<title>商品一覧</title>
 </head>
+
 <body>
 	<header th:replace="layout/_header :: header"></header>
 	<main>
-  <h1>商品一覧ページ</h1>
+		<h1>商品一覧ページ</h1>
 
-  <ul>
-    <li th:each="product : ${products}">
-		<a th:href="'/product/' + ${product.id}">
-		     [[${product.name}]]（[[${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}]]円）
-      </a>
-    </li>
-  </ul>
+		<ul>
+			<li th:each="product : ${products}">
+				<a th:href="'/product/' + ${product.id}">
+					[[${product.name}]]（[[${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}]]円）
+				</a>
+				<form th:action="@{/cart/add}" method="post" style="display:inline">
+					<input type="hidden" name="productId" th:value="${product.id}" />
+					<button type="submit">カートに追加</button>
+				</form>
+			</li>
+		</ul>
 
-  <a href="/">▶ トップページに戻る</a>
+		<a href="/">▶ トップページに戻る</a>
 </body>
+
 </html>
