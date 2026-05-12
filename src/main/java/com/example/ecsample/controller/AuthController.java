@@ -66,3 +66,4 @@ public class AuthController {
 		return "redirect:/login";
 	}
 }
+//Gitの練習
